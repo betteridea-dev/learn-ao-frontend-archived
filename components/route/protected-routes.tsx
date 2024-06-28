@@ -2,6 +2,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import Toast from "@/components/banners/toast";
+import { redirect } from "next/navigation";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated } = useAuth();
@@ -15,10 +16,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (mounted && !isAuthenticated) {
       setShowToast(true);
-      // Check if window is defined before using it
-      if (typeof window !== "undefined") {
-        window.location.href = "/"; // Redirect to home if not authenticated
-      }
+      redirect("/");
     }
   }, [isAuthenticated, mounted]);
 
@@ -27,7 +25,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   };
 
   if (!mounted) {
-    return null; // Return null while component is mounting
+    return null;
   }
 
   return (
