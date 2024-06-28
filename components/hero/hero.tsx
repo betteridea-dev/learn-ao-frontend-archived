@@ -1,3 +1,4 @@
+// components/Hero.tsx
 "use client";
 import React, { useState } from "react";
 import Gift from "../banners/gift";
@@ -7,6 +8,7 @@ import { connect, disconnect } from "@othent/kms";
 import Arweave from "arweave";
 import Toast from "../banners/toast";
 import Link from "next/link";
+import { useAuth } from '@/context/AuthContext';
 
 const arweave = Arweave.init({
   host: "arweave.net",
@@ -16,23 +18,20 @@ const arweave = Arweave.init({
 
 const Hero: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
-  const [signedUp, setSignedUp] = useState(false); // Track sign-up status
-  const [userName, setUserName] = useState<string>(""); // State to hold user name
+
+  const { isAuthenticated, user, login, logout } = useAuth();
 
   const handleConnect = async () => {
     setLoading(true);
-    setError(null);
     try {
       const res = await connect();
       console.log("Connected:\n", res);
       setToast({ message: "Successfully connected!", type: "success" });
-      setSignedUp(true);
-      setUserName(res.given_name); // Extract and set the user's name from the response
+      login(res.given_name);
     } catch (err) {
       console.error("Connection error:", err);
       setToast({
@@ -46,11 +45,11 @@ const Hero: React.FC = () => {
 
   const handleDisconnect = async () => {
     setLoading(true);
-    setError(null);
     try {
       const res = await disconnect();
       console.log("Disconnected:\n", res);
       setToast({ message: "Successfully disconnected!", type: "success" });
+      logout(); // Use logout function from the context
     } catch (err) {
       console.error("Disconnection error:", err);
       setToast({
@@ -94,21 +93,20 @@ const Hero: React.FC = () => {
             Don’t worry if you don’t have a wallet. Simply sign in with Google.
           </div>
           <div className="mt-20 lg:mt-0">
-            {signedUp ? (
-              <>
+            {isAuthenticated ? (
+              <div className="flex justify-center flex-col">
                 <div className="text-white mb-2 font-lora">
-                  Welcome <span className="italic">{userName}!</span>
+                  Welcome <span className="italic">{user}!</span>
                 </div>
                 <Link href="/courses">
                   <div className="text-white px-2 py-1 rounded-2xl border border-zinc-100 justify-center items-center gap-2.5 inline-flex">
                     Go to Courses
                   </div>
                 </Link>
-              </>
+                <button onClick={handleDisconnect}>Disconnect</button>
+              </div>
             ) : (
-              <>
-                <Black text="Sign up" onClick={handleConnect} />
-              </>
+              <Black text="Sign up" onClick={handleConnect} />
             )}
           </div>
         </div>
