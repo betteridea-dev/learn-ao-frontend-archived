@@ -1,14 +1,16 @@
 // components/Hero.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Gift from "../banners/gift";
 import Black from "../buttons/black-button";
 import Nav from "./nav";
-import { connect, disconnect } from "@othent/kms";
+
 import Arweave from "arweave";
 import Toast from "../banners/toast";
 import Link from "next/link";
 import { useAuth } from '@/context/AuthContext';
+import dynamic from "next/dynamic";
+// import { connect, disconnect } from "@othent/kms";
 
 const arweave = Arweave.init({
   host: "arweave.net",
@@ -22,6 +24,14 @@ const Hero: React.FC = () => {
     message: string;
     type: "success" | "error";
   } | null>(null);
+  const [connect, setConnect] = useState<any>(null);
+  const [disconnect, setDisconnect] = useState<any>(null);
+
+  useEffect(() => {
+    const othent = require("@othent/kms");
+    setConnect(() => othent.connect);
+    setDisconnect(() => othent.disconnect);
+  },[])
 
   const { isAuthenticated, user, login, logout } = useAuth();
 
