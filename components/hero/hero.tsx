@@ -6,7 +6,7 @@ import Nav from "./nav";
 const Hero = () => {
   return (
     <div className="relative w-full h-full">
-      <div className="text-right absolute right-8 top-8">
+      <div className="text-right absolute hidden lg:flex right-8 top-8">
         <span className="text-neutral-400 text-base font-normal font-plus-jakarta-sans leading-tight">
           Dumdum wants help
           <br />
@@ -19,21 +19,21 @@ const Hero = () => {
           mastering AO development.
         </span>
       </div>
-      <div className="flex flex-col gap-y-6 justify-center items-center">
-        <div className="2xl:mt-10 mt-32">
+      <div className="flex flex-col gap-y-6 p-10 justify-center items-center">
+        <div className="mt-32 2xl:mt-0">
           <Gift />
         </div>
-        <div className="font-lora text-[46px] 2xl:text-[56px] text-white flex flex-col leading-[60px] text-center">
+        <div className="font-lora text-[26px] lg:text-[46px] 2xl:text-[56px] text-white flex flex-col leading-[40px] lg:leading-[60px] text-center">
           <div>Dumdum wants you.</div>
           <div>
             to help him <span className="italic">LearnAO</span>
           </div>
         </div>
         <div className="flex-col flex justify-center items-center gap-3 text-center">
-          <div className="text-right text-neutral-400 text-xs 2xl:text-md font-normal font-plus-jakarta-sans leading-tight">
+          <div className="text-center text-neutral-400 text-sm 2xl:text-md font-normal font-plus-jakarta-sans leading-tight">
             Don’t worry if you don’t have a wallet. Simply sign in with Google.
           </div>
-          <div>
+          <div className="mt-20 lg:mt-0">
             <Black text="Sign up" />
           </div>
         </div>
