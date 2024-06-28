@@ -15,8 +15,9 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (mounted && !isAuthenticated) {
       setShowToast(true);
+      // Check if window is defined before using it
       if (typeof window !== "undefined") {
-        window.location.href = "/";
+        window.location.href = "/"; // Redirect to home if not authenticated
       }
     }
   }, [isAuthenticated, mounted]);
@@ -26,7 +27,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   };
 
   if (!mounted) {
-    return null;
+    return null; // Return null while component is mounting
   }
 
   return (
