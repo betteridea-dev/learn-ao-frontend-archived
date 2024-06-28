@@ -8,9 +8,7 @@ import Nav from "./nav";
 import Arweave from "arweave";
 import Toast from "../banners/toast";
 import Link from "next/link";
-import { useAuth } from '@/context/AuthContext';
-import dynamic from "next/dynamic";
-// import { connect, disconnect } from "@othent/kms";
+import { useAuth } from "@/context/AuthContext";
 
 const arweave = Arweave.init({
   host: "arweave.net",
@@ -24,21 +22,13 @@ const Hero: React.FC = () => {
     message: string;
     type: "success" | "error";
   } | null>(null);
-  const [connect, setConnect] = useState<any>(null);
-  const [disconnect, setDisconnect] = useState<any>(null);
-
-  useEffect(() => {
-    const othent = require("@othent/kms");
-    setConnect(() => othent.connect);
-    setDisconnect(() => othent.disconnect);
-  },[])
 
   const { isAuthenticated, user, login, logout } = useAuth();
 
   const handleConnect = async () => {
     setLoading(true);
     try {
-      const res = await connect();
+      const res = await (await import("@othent/kms")).connect();
       console.log("Connected:\n", res);
       setToast({ message: "Successfully connected!", type: "success" });
       login(res.given_name);
@@ -56,7 +46,7 @@ const Hero: React.FC = () => {
   const handleDisconnect = async () => {
     setLoading(true);
     try {
-      const res = await disconnect();
+      const res = await (await import("@othent/kms")).disconnect();
       console.log("Disconnected:\n", res);
       setToast({ message: "Successfully disconnected!", type: "success" });
       logout(); // Use logout function from the context
