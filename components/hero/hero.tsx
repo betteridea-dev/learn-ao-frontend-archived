@@ -5,16 +5,9 @@ import Gift from "../banners/gift";
 import Black from "../buttons/black-button";
 import Nav from "./nav";
 
-import Arweave from "arweave";
 import Toast from "../banners/toast";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
-
-const arweave = Arweave.init({
-  host: "arweave.net",
-  protocol: "https",
-  port: 443,
-});
 
 const Hero: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -23,15 +16,20 @@ const Hero: React.FC = () => {
     type: "success" | "error";
   } | null>(null);
 
+  useEffect(() => {
+    import("@othent/kms").then(w => window.arweaveWallet = w);
+  }, [])
+
   const { isAuthenticated, user, login, logout } = useAuth();
 
   const handleConnect = async () => {
     setLoading(true);
     try {
-      const res = await (await import("@othent/kms")).connect();
+      const res = await window.arweaveWallet.connect();
       console.log("Connected:\n", res);
       setToast({ message: "Successfully connected!", type: "success" });
-      login(res.given_name);
+      // login(res.given_name);
+      login(res.name || res.given_name, res.email)
     } catch (err) {
       console.error("Connection error:", err);
       setToast({
@@ -46,7 +44,7 @@ const Hero: React.FC = () => {
   const handleDisconnect = async () => {
     setLoading(true);
     try {
-      const res = await (await import("@othent/kms")).disconnect();
+      const res = await window.arweaveWallet.disconnect();
       console.log("Disconnected:\n", res);
       setToast({ message: "Successfully disconnected!", type: "success" });
       logout(); // Use logout function from the context
