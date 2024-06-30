@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
       );
 
-      if (res.status === 200 && res.data.access_token) {
+      if (res.data.access_token) {
         const { token } = res.data;
         localStorage.setItem("jwt-token", token);
         setIsAuthenticated(true);

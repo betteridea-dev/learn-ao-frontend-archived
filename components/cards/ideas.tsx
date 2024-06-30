@@ -1,18 +1,21 @@
 import React from "react";
 import { ideas, Idea } from "@/data/dummyData";
+import Link from "next/link";
 
 const IdeasCard = () => {
   return (
     <div className="grid grid-cols-1 w-full gap-4 items-center">
       {ideas.map((idea: Idea) => (
-        <div className="flex bg-[#282828] p-4 items-center justify-between rounded-lg">
-          <div className="text-center text-zinc-100 text-base font-medium font-plus-jakarta-sans leading-tight">
-            {idea.name}
+        <Link href={`/courses/ideas/${idea.id}`}>
+          <div className="flex bg-[#282828] p-4 items-center justify-between rounded-lg">
+            <div className="text-center text-zinc-100 text-base font-medium font-plus-jakarta-sans leading-tight">
+              {idea.name}
+            </div>
+            <button className="bg-[#353535] text-zinc-100 text-base font-light font-plus-jakarta-sans p-2 rounded-md leading-tight">
+              Talk to us
+            </button>
           </div>
-          <button className="bg-[#353535] text-zinc-100 text-base font-light font-plus-jakarta-sans p-2 rounded-md leading-tight">
-            Talk to us
-          </button>
-        </div>
+        </Link>
       ))}
     </div>
   );

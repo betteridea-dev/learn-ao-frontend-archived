@@ -1,0 +1,64 @@
+{
+  "chapters": [
+    {
+      "type": "text",
+      "content": "### Chapter 1: Dum-Dum's Big Idea\n\nOnce upon a time, in the vast digital world, lived an elephant named Dum-Dum. Dum-Dum wasn’t an ordinary elephant; he loved technology and was always looking for ways to organize his life better. One day, he stumbled upon \"ao,\" a powerful decentralized computer built on Arweave. Intrigued by its potential, Dum-Dum decided to create a to-do list to manage his tasks and help others do the same. He was eager to share his creation with the world and show how you, too, can build it.\n\nHe started by setting up his project. Would Dum-Dum be able to bring his idea to life? Only time would tell."
+    },
+    {
+      "type": "text",
+      "content": "### Chapter 2: Setting Up the Foundation\n\nTo get started, Dum-Dum needed to set up his project. Being the smart developer he is, instead of creating a new file locally, he went to https://ide.betteridea.dev/ to directly start building his to-do list application in an online IDE environment. This would allow him to quickly prototype and iterate without worrying about local setup and dependencies.\n\nIn there, he would set up the basic structure for his tasks using Lua. He required the JSON module and initialized the tables for tasks:"
+    },
+    {
+      "type": "code",
+      "content": "local json = require('json')\n\nTASKS_TABLE = TASKS_TABLE or {}\nPENDING_TASKS_TABLE = PENDING_TASKS_TABLE or {}\n\nTASK_KEYS = TASK_KEYS or {}"
+    },
+    {
+      "type": "text",
+      "content": "With the foundation in place, Dum-Dum felt ready to move forward. But how would he create tasks?\n\n**Want to see how Dum-Dum creates tasks? Click here to continue!**"
+    },
+    {
+      "type": "text",
+      "content": "### Chapter 3: Creating the Tasks\n\nNext, Dum-Dum needed a way to create tasks. He added a handler for creating tasks:"
+    },
+    {
+      "type": "code",
+      "content": "Handlers.add(\n    \"CreateTask\",\n    Handlers.utils.hasMatchingTag(\"Action\", \"Create-Task\"),\n    function(msg)\n        -- Check if the message, task, or sender is invalid\n        if not msg or not msg.Task or not msg.From then\n            print(\"Error: Invalid message, task, or process.\")\n            return false\n        end\n\n        -- Initialize TASKS_TABLE if not already present\n        if not TASKS_TABLE[msg.From] then\n            TASKS_TABLE[msg.From] = {}\n        end\n\n        -- Initialize TASK_KEYS if not already present\n        if not TASK_KEYS[msg.From] then\n            TASK_KEYS[msg.From] = 0\n        end\n\n        -- Get the current task key\n        local currentTaskKey = TASK_KEYS[msg.From]\n\n        -- Assign the task to the TASKS_TABLE at the current key\n        TASKS_TABLE[msg.From][currentTaskKey] = msg.Task\n\n        -- Increment the task key for the next task\n        TASK_KEYS[msg.From] = currentTaskKey + 1\n\n        -- Print the updated task list\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+    },
+    {
+      "type": "text",
+      "content": "With this handler in place, Dum-Dum could now create new tasks effortlessly. But why was it important for him to be able to read tasks?\n\nUnderstanding the tasks already on his list is crucial for Dum-Dum's productivity. By being able to read tasks, he can stay organized and focused on completing his to-do list efficiently.\n\n**Curious about how Dum-Dum will read tasks? Click here to continue!**"
+    },
+    {
+      "type": "text",
+      "content": "### Chapter 4: Reading Tasks\n\nAfter setting up the ability to create tasks, Dum-Dum recognized the need to read them. A handler was added for this purpose:"
+    },
+    {
+      "type": "code",
+      "content": "Handlers.add(\n    \"ReadTask\",\n    Handlers.utils.hasMatchingTag(\"Action\", \"Read-Task\"),\n    function(msg)\n        -- Print the task list for the user\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+    },
+    {
+      "type": "text",
+      "content": "With this handler, Dum-Dum could now easily access and view his list of tasks. But what if Dum-Dum wanted to update the tasks?\n\nUpdating tasks allows Dum-Dum to make changes as needed, ensuring his to-do list stays relevant and reflects his current priorities.\n\n**Curious about how Dum-Dum updates tasks? Click here to continue!**"
+    },
+    {
+      "type": "text",
+      "content": "### Chapter 5: Updating Tasks\n\nDum-Dum realized he needed to update tasks. He added a handler to update tasks:"
+    },
+    {
+      "type": "code",
+      "content": "Handlers.add(\n    \"UpdateTask\",  -- Handler name\n    Handlers.utils.hasMatchingTag(\"Action\", \"Update-Task\"),  -- Match action tag\n    function(msg)  -- Handler function\n        -- Check if the message, sender, key, or task is invalid\n        if not msg or not msg.From or not msg.Key or not msg.Task then\n            print(\"Error: Invalid message, key, user, or task.\")\n            return false\n        end\n\n        -- Convert key to integer\n        local key = msg.Key\n        local int_key = tonumber(key)\n\n        -- Print the task before updating\n        print(TASKS_TABLE[msg.From][int_key])\n\n        -- Update the task with the specified key\n        TASKS_TABLE[msg.From][key] = msg.Task\n\n        -- Print the updated task list\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+    },
+    {
+      "type": "text",
+      "content": "Dum-Dum's system could now update tasks. But what about deleting tasks?\n\n**Eager to see how Dum-Dum deletes tasks? Click here to continue!**"
+    },
+    {
+      "type": "text",
+      "content": "### Chapter 6: Deleting Tasks\n\nFinally, Dum-Dum needed to delete tasks. He added a handler to delete tasks, ensuring tasks existed before deleting them:"
+    },
+    {
+      "type": "code",
+      "content": "Handlers.add(\n    \"DeleteTask\",  -- Handler name\n    Handlers.utils.hasMatchingTag(\"Action\", \"Delete-Task\"),  -- Match action tag\n    function(msg)  -- Handler function\n        -- Check if the message, sender, or key is invalid\n        if not msg or not msg.From or not msg.Key then\n            print(\"Error: Invalid message, key, or user.\")\n            return false\n        end\n\n        -- Convert key to integer\n        local key = msg.Key\n        local int_key = tonumber(key)\n\n        -- Check if the user's task list or the task with the specified key exists\n        if not TASKS_TABLE[msg.From] or TASKS_TABLE[msg.From][int_key] == nil then\n            print(\"Error: Task with key\", key, \"for user\", msg.From, \"does not exist.\")\n            return false\n        end\n\n        -- Print the task to be deleted\n        print(TASKS_TABLE[msg.From][int_key])\n\n        -- Delete the task from the user's task list\n        TASKS_TABLE[msg.From][int_key] = nil\n\n        -- Print the updated task list\n        print(TASKS_TABLE[msg.From][int_key])\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+    }
+  ]
+}

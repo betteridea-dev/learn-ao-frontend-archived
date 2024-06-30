@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@betteridea/codecell": "^1.4.3",
     "@othent/kms": "^1.0.11",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",

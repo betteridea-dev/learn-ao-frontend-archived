@@ -34,11 +34,11 @@ export default function CourseDetail({
           </div>
         </div>
         <div className="mt-8 text-[#E9FF91] text-center lg:text-start text-base font-semibold font-plus-jakarta-sans uppercase leading-normal">
-          Checkpoint : {params.checkpointId}
+          Checkpoint : {params.courseId}
         </div>
         <div className="flex items-center justify-between">
           {previousCheckpointId > 0 && (
-            <a href={`/courses/${params.courseId}/${previousCheckpointId}`}>
+            <a href={`/courses/ideas/${params.courseId}`}>
               <Direction
                 bgColor="bg-[#282828]"
                 textColor="text-[#828282]"
@@ -47,7 +47,7 @@ export default function CourseDetail({
               />
             </a>
           )}
-          <a href={`/courses/${params.courseId}/${nextCheckpointId}`}>
+          <a href={`/courses/ideas/${params.courseId}`}>
             <Direction
               bgColor="bg-[#E9FF91]"
               textColor="text-[#060606]"
