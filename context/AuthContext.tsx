@@ -1,19 +1,19 @@
 "use client";
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import axios from "axios"
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import axios from "axios";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: string | null;
-  login: (userName: string, email:string) => void;
+  login: (userName: string, email: string) => void;
   logout: () => void;
 }
 
-function uint8ArrayToBase64(array:any) {
+function uint8ArrayToBase64(array: any) {
   return btoa(String.fromCharCode.apply(null, [...array]));
 }
 
-function base64ToUint8Array(base64:any) {
+function base64ToUint8Array(base64: any) {
   return new Uint8Array([...atob(base64)].map((c) => c.charCodeAt(0)));
 }
 
@@ -31,16 +31,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const addrEncoded = new TextEncoder().encode(activeAddress);
     const signature = await window.arweaveWallet.signMessage(addrEncoded);
 
-    console.log(process.env.NEXT_PUBLIC_BACKEND_BASE)
-    const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_BASE + "/auth/login", JSON.stringify({
-      data: uint8ArrayToBase64(addrEncoded),
-      signature: uint8ArrayToBase64(signature),
-      publicKey: await window.arweaveWallet.getActivePublicKey(),
-      walletAddress: activeAddress,
-      username: email,
-      password: 'x'
-    }))
-    console.log(res.data)
+    console.log(process.env.NEXT_PUBLIC_BACKEND_BASE);
+    const res = await axios.post(
+      process.env.NEXT_PUBLIC_BACKEND_BASE + "/auth/login",
+      {
+        data: uint8ArrayToBase64(addrEncoded),
+        signature: uint8ArrayToBase64(signature),
+        publicKey: await window.arweaveWallet.getActivePublicKey(),
+        walletAddress: activeAddress,
+        username: email,
+        password: "x",
+      }
+    );
+    console.log(res.data);
   };
 
   const logout = () => {
@@ -58,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
