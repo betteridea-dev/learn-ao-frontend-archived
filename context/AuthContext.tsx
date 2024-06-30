@@ -5,7 +5,7 @@ import axios from "axios";
 interface AuthContextType {
   isAuthenticated: boolean;
   user: string | null;
-  login: (userName: string, email: string) => void;
+  login: (userName: string, email: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const login = async (userName: string, email: string) => {
     // setIsAuthenticated(true);
@@ -43,12 +44,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         password: "x",
       }
     );
-    console.log(res.data);
+    // console.log(res.data);
+    if (res.data.access_token) {
+      setIsAuthenticated(true);
+      setUser(userName);
+      setEmail(email);
+      setAccessToken(res.data.access_token);
+    }else{
+      setIsAuthenticated(false);
+    }
+
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
+    setEmail(null);
+    setAccessToken(null);
   };
 
   return (

@@ -26,10 +26,10 @@ const Hero: React.FC = () => {
     setLoading(true);
     try {
       const res = await window.arweaveWallet.connect();
+      // login(res.given_name);
+      await login(res.name || res.given_name, res.email)
       console.log("Connected:\n", res);
       setToast({ message: "Successfully connected!", type: "success" });
-      // login(res.given_name);
-      login(res.name || res.given_name, res.email)
     } catch (err) {
       console.error("Connection error:", err);
       setToast({
