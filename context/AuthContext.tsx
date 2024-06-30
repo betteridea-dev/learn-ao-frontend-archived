@@ -26,37 +26,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const login = async (userName: string, email: string) => {
-    // setIsAuthenticated(true);
-    // setUser(userName);
-    const activeAddress = await window.arweaveWallet.getActiveAddress();
-    const addrEncoded = new TextEncoder().encode(activeAddress);
-    const signature = await window.arweaveWallet.signMessage(addrEncoded);
+    try {
+      const activeAddress = await window.arweaveWallet.getActiveAddress();
+      const addrEncoded = new TextEncoder().encode(activeAddress);
+      const signature = await window.arweaveWallet.signMessage(addrEncoded);
 
-    console.log(process.env.NEXT_PUBLIC_BACKEND_BASE);
-    const res = await axios.post(
-      process.env.NEXT_PUBLIC_BACKEND_BASE + "/auth/login",
-      {
-        data: uint8ArrayToBase64(addrEncoded),
-        signature: uint8ArrayToBase64(signature),
-        publicKey: await window.arweaveWallet.getActivePublicKey(),
-        walletAddress: activeAddress,
-        username: email,
-        password: "x",
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_BASE + "/auth/login",
+        {
+          data: uint8ArrayToBase64(addrEncoded),
+          signature: uint8ArrayToBase64(signature),
+          publicKey: await window.arweaveWallet.getActivePublicKey(),
+          walletAddress: activeAddress,
+          username: email,
+          password: "x",
+        }
+      );
+
+      if (res.status === 200 && res.data.access_token) {
+        const { token } = res.data;
+        localStorage.setItem("jwt-token", token);
+        setIsAuthenticated(true);
+        setUser(userName);
+        setEmail(email);
+        setAccessToken(res.data.access_token);
+      } else {
+        setIsAuthenticated(false);
       }
-    );
-    // console.log(res.data);
-    if (res.data.access_token) {
-      setIsAuthenticated(true);
-      setUser(userName);
-      setEmail(email);
-      setAccessToken(res.data.access_token);
-    }else{
+    } catch (err) {
+      console.error("Login error:", err);
       setIsAuthenticated(false);
+      setAccessToken(null);
+      setEmail(null);
+      setUser(null);
     }
-
   };
 
   const logout = () => {
+    localStorage.removeItem("jwt-token"); 
     setIsAuthenticated(false);
     setUser(null);
     setEmail(null);

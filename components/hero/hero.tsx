@@ -1,4 +1,3 @@
-// components/Hero.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 import Gift from "../banners/gift";
@@ -17,8 +16,8 @@ const Hero: React.FC = () => {
   } | null>(null);
 
   useEffect(() => {
-    import("@othent/kms").then(w => window.arweaveWallet = w);
-  }, [])
+    import("@othent/kms").then((w) => (window.arweaveWallet = w));
+  }, []);
 
   const { isAuthenticated, user, login, logout } = useAuth();
 
@@ -44,10 +43,10 @@ const Hero: React.FC = () => {
   const handleDisconnect = async () => {
     setLoading(true);
     try {
-      const res = await window.arweaveWallet.disconnect();
-      console.log("Disconnected:\n", res);
+      await window.arweaveWallet.disconnect();
+      console.log("Disconnected");
       setToast({ message: "Successfully disconnected!", type: "success" });
-      logout(); // Use logout function from the context
+      logout();
     } catch (err) {
       console.error("Disconnection error:", err);
       setToast({
