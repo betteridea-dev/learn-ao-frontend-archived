@@ -46,7 +46,7 @@
         },
         {
           "type": "text",
-          "content": "\"Named functions are easy to identify and call by their name,\" said Lua Lama. \"You define them with a name, parameters (inputs), and a body with the instructions to execute.\"\n\nDum-Dum understood right away. He created a named function called `greet` that took a `name` parameter and printed a greeting.\n\n**Unnamed Functions (Lambdas):**"
+          "content": "\"Named functions are easy to identify and call by their name,\" said Lua Lama. \"You define them with a name, parameters (inputs), and a body with the instructions to execute.\"\n\nDum-Dum understood right away. He created a named function called greet that took a name parameter and printed a greeting.\n\n**Unnamed Functions (Lambdas):**"
         },
         {
           "type": "code",
@@ -54,7 +54,7 @@
         },
         {
           "type": "text",
-          "content": "\"Unnamed functions, also known as lambdas, are like anonymous helpers,\" Lua Lama continued. \"You can assign them to variables or pass them around like values.\"\n\nDum-Dum assigned an unnamed function that calculated the square of a number to the variable `square`. He could then call this function using the variable name.\n\n**Calling Functions**\n\"To call a function, you write its name followed by parentheses,\" Lua Lama explained. \"If it takes arguments, you put them inside the parentheses, separated by commas.\"\n\nDum-Dum practiced calling functions with different numbers of arguments, understanding how Lua adjusted the arguments to match the parameters.\n\nAs he worked through more examples, Dum-Dum realized functions were like reusable code snippets, allowing him to encapsulate logic and avoid repeating the same instructions over and over.\n\n\"Functions are the building blocks that bring your Lua programs to life,\" Lua Lama concluded with a smile.\n\n**Up Next:** With a solid grasp of variables and functions, Dum-Dum is ready to explore the world of tables – Lua's versatile data structures. Click \"Next\" to learn how to keep your tables organized and efficient!"
+          "content": "\"Unnamed functions, also known as lambdas, are like anonymous helpers,\" Lua Lama continued. \"You can assign them to variables or pass them around like values.\"\n\nDum-Dum assigned an unnamed function that calculated the square of a number to the variable square. He could then call this function using the variable name.\n\n**Calling Functions**\n\"To call a function, you write its name followed by parentheses,\" Lua Lama explained. \"If it takes arguments, you put them inside the parentheses, separated by commas.\"\n\nDum-Dum practiced calling functions with different numbers of arguments, understanding how Lua adjusted the arguments to match the parameters.\n\nAs he worked through more examples, Dum-Dum realized functions were like reusable code snippets, allowing him to encapsulate logic and avoid repeating the same instructions over and over.\n\n\"Functions are the building blocks that bring your Lua programs to life,\" Lua Lama concluded with a smile.\n\n**Up Next:** With a solid grasp of variables and functions, Dum-Dum is ready to explore the world of tables – Lua's versatile data structures. Click \"Next\" to learn how to keep your tables organized and efficient!"
         }
       ]
     },
@@ -63,7 +63,7 @@
       "content": [
         {
           "type": "text",
-          "content": "After mastering variables and functions, Dum-Dum was ready to dive into the world of tables – Lua's versatile data structures. Lua Lama knew that keeping tables organized and efficient was crucial for writing clean, maintainable code.\n\n\"Tables are like dynamic containers that can hold multiple values of different types,\" Lua Lama began. \"But with great power comes great responsibility – you must learn to keep your tables tidy.\"\n\n1. Adding Elements with `table.insert`: The `table.insert` function allows you to add new elements to a table"
+          "content": "After mastering variables and functions, Dum-Dum was ready to dive into the world of tables – Lua's versatile data structures. Lua Lama knew that keeping tables organized and efficient was crucial for writing clean, maintainable code.\n\n\"Tables are like dynamic containers that can hold multiple values of different types,\" Lua Lama began. \"But with great power comes great responsibility – you must learn to keep your tables tidy.\"\n\n1. Adding Elements with table.insert: The table.insert function allows you to add new elements to a table"
         },
         {
           "type": "code",
@@ -71,7 +71,7 @@
         },
         {
           "type": "text",
-          "content": "2. Concatenating with `table.concat`"
+          "content": "2. Concatenating with table.concat"
         },
         {
           "type": "code",
@@ -79,7 +79,7 @@
         },
         {
           "type": "text",
-          "content": "3. Removing Elements with `table.remove`: The `table.remove` function lets you remove elements from a table by specifying their position"
+          "content": "3. Removing Elements with table.remove: The table.remove function lets you remove elements from a table by specifying their position"
         },
         {
           "type": "code",
@@ -87,7 +87,7 @@
         },
         {
           "type": "text",
-          "content": "4. Getting the Length with `#`"
+          "content": "4. Getting the Length with #"
         },
         {
           "type": "code",
@@ -95,7 +95,7 @@
         },
         {
           "type": "text",
-          "content": "5. Iterating with `pairs` and `ipairs`: To iterate over the elements of a table, you can use the `pairs` or `ipairs` functions. They allow you to access both the indices and values in a loop."
+          "content": "5. Iterating with pairs and ipairs: To iterate over the elements of a table, you can use the pairs or ipairs functions. They allow you to access both the indices and values in a loop."
         },
         {
           "type": "code",

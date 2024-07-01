@@ -16,7 +16,8 @@ const Projects = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const data = await fetchCourse();
+        const response = await fetch("/utils/projects.json");
+        const data = await response.json();
         console.log(data);
         setCourseData(data);
       } catch (error) {
@@ -40,41 +41,49 @@ const Projects = () => {
   };
 
   return (
-    <main className="min-h-screen p-0 lg:py-6 lg:px-6 text-white">
-      <div className="bg-black h-full font-plus-jakarta-sans lg:rounded-[2rem] flex flex-col w-full p-2 lg:p-20 relative">
+    <main className="min-h-screen p-0 text-white">
+      <div className="bg-black h-full font-plus-jakarta-sans flex flex-col w-full p-2 lg:p-20 relative">
         {error && <p>{error}</p>}
         {courseData && (
           <div>
             <div className="text-center text-white text-[34px] font-bold font-['Lora'] leading-[34px] pb-16">
               Basics of Lua
             </div>
-            <h2 className="text-[#E9FF91] font-semibold mb-8 uppercase">
+            <h2 className="text-[#E9FF91] font-semibold mb-8 px-4 uppercase">
               {courseData.chapters[currentPage].title}
             </h2>
-            {courseData.chapters[currentPage].content.map(
-              (section: any, idx: any) => (
-                <div key={idx}>
-                  {section.type === "text" && (
-                    <div className="my-4 text-[16px]">
+            <div className="flex w-full">
+              <div className="w-1/2 p-4">
+                {courseData.chapters[currentPage].content
+                  .filter((section: any) => section.type === "text")
+                  .map((section: any, idx: any) => (
+                    <div key={idx} className="my-4 text-[16px]">
                       <ReactMarkdown>{section.content}</ReactMarkdown>
                     </div>
-                  )}
-                  {section.type === "code" && (
-                    <CodeCell
-                      nowallet
-                      cellId={`${currentPage}-${idx}`}
-                      appName="LearnAO"
-                      code={section.content}
-                      onAOProcess={(pid) => console.log("using process: ", pid)}
-                      onNewMessage={(msgs) =>
-                        console.log("new messages: ", msgs)
-                      }
-                      onInbox={(inbox) => console.log("got inbox: ", inbox)}
-                    />
-                  )}
-                </div>
-              )
-            )}
+                  ))}
+              </div>
+              <div className="w-1/2 p-4 rounded-lg">
+                {courseData.chapters[currentPage].content
+                  .filter((section: any) => section.type === "code")
+                  .map((section: any, idx: any) => (
+                    <div key={idx} className="my-4 text-[16px]">
+                      <CodeCell
+                        nowallet
+                        cellId={`${currentPage}-${idx}`}
+                        appName="LearnAO"
+                        code={section.content}
+                        onAOProcess={(pid) =>
+                          console.log("using process: ", pid)
+                        }
+                        onNewMessage={(msgs) =>
+                          console.log("new messages: ", msgs)
+                        }
+                        onInbox={(inbox) => console.log("got inbox: ", inbox)}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </div>
             <div className="flex justify-between items-center gap-6 mt-10">
               <button
                 onClick={handlePrevious}
