@@ -6,10 +6,10 @@ import dumdum from "@/public/home/dumdum-gun.svg";
 import Ideas from "@/components/cards/ideas";
 
 const Courses = () => {
+
   return (
-    // <main className="min-h-screen bg-black lg:bg-white p-0 lg:py-6 lg:px-6 text-white">
-    <main className="min-h-screen bg-black p-0 text-white">
-      <div className="bg-black h-full lg:rounded-[4rem] flex relative flex-col w-full p-2">
+    <main className="min-h-screen bg-black p-0 text-white relative">
+      <div className="bg-black h-full lg:rounded-[4rem] flex  flex-col w-full p-2">
         <div className="absolute bottom-0 -left-4 hidden lg:flex">
           <Image src={dumdum} alt="dumdum" width={80} height={80} />
         </div>

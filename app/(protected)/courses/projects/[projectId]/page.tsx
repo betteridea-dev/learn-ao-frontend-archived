@@ -40,12 +40,12 @@ const Projects = () => {
   };
 
   return (
-    <main className="min-h-screen p-0 lg:py-6 lg:px-6 text-white">
-      <div className="bg-black h-full font-plus-jakarta-sans lg:rounded-[2rem] flex flex-col w-full p-2 lg:p-20 relative">
+    <main className="min-h-screen p-0 text-white">
+      <div className="bg-black h-full font-plus-jakarta-sans flex flex-col w-full p-2 lg:p-20 relative">
         {error && <p>{error}</p>}
         {courseData && (
           <div>
-            <div className="text-center text-white text-[34px] font-bold font-['Lora'] leading-[34px] pb-16">
+            <div className="text-center text-white text-[34px] mt-8 lg:mt-0 font-bold font-['Lora'] leading-[34px] pb-16">
               Basics of Lua
             </div>
             <h2 className="text-[#E9FF91] font-semibold mb-8 uppercase">
