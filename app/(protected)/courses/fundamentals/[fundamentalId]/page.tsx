@@ -52,7 +52,7 @@ export default function CourseDetail({ params }: CourseDetailProps) {
           return;
         }
 
-        const response = await axios.get(`http://localhost:8000/course`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE}/course`, {
           headers: {
             accept: "*/*",
             Authorization: `Bearer ${token}`,
