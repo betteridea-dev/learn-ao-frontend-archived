@@ -16,12 +16,13 @@ const Invite: React.FC<InviteProps> = ({ isOpen, onClose, onSuccess }) => {
     try {
       const token = localStorage.getItem("jwt-token");
 
+      console.log(code, token)
       if (!token) {
         throw new Error("No token found");
       }
 
       const response = await axios.post(
-        "http://localhost:8000/invitation/user",
+        process.env.NEXT_PUBLIC_BACKEND_BASE +"/invitation/user",
         {
           invitationCode: code,
         },
@@ -33,7 +34,7 @@ const Invite: React.FC<InviteProps> = ({ isOpen, onClose, onSuccess }) => {
         }
       );
 
-      return response.data.isValid; // Assuming the response contains an `isValid` field
+      return response.data.isUsed;
     } catch (error) {
       console.error("Error validating invite code:", error);
       return false;
@@ -57,13 +58,13 @@ const Invite: React.FC<InviteProps> = ({ isOpen, onClose, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-[#101010] p-8 rounded shadow-md w-full max-w-sm text-white font-plus-jakarta-sans">
+      <div className="bg-[#101010] p-8 rounded shadow-md w-full max-w-lg text-white font-plus-jakarta-sans">
         <button onClick={onClose} className="absolute top-4 right-4 text-xl">
           &times;
         </button>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm mb-2">Invite Code</label>
+            <label className="block text-sm mb-4">You need an invite code to get beta access to the platform 👀</label>
             <input
               type="text"
               value={inviteCode}

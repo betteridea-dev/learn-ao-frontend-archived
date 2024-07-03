@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import axios from "axios";
+import { setCookie, destroyCookie } from "nookies";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -44,14 +45,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       );
 
       if (res.data.access_token) {
-        const { token } = res.data;
+        const token = res.data.access_token
         localStorage.setItem("jwt-token", token);
         setIsAuthenticated(true);
         setUser(userName);
         setEmail(email);
-        setAccessToken(res.data.access_token);
+        setAccessToken(token);
+        setCookie(null, "jwt-token", token, {
+          maxAge: 7 * 24 * 60 * 60, // 7 days?
+        })
+
       } else {
         setIsAuthenticated(false);
+        destroyCookie(null, "jwt-token");
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -59,6 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setAccessToken(null);
       setEmail(null);
       setUser(null);
+      destroyCookie(null, "jwt-token");
     }
   };
 
@@ -68,6 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     setEmail(null);
     setAccessToken(null);
+    destroyCookie(null, "jwt-token");
   };
 
   return (
