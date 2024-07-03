@@ -1,109 +1,103 @@
 {
+  "heading": [
+    {
+      "title": "Building a To-Do list with Dum Dum"
+    }
+  ],
   "chapters": [
     {
-      "title": "Checkpoint 1",
+      "title": "Pre-Requisites",
       "content": [
         {
           "type": "text",
-          "content": "It was just another day in Code Town for Dum-Dum, until he decided to stop by the Lua Academy. As he approached the entrance, his mentor, Lua Lama, greeted him with a warm smile.\n\n\"Ah, Dum-Dum! I'm glad you're here,\" Lua Lama said. \"Today, we're going to explore the building blocks of Lua: variables.\"\n\nDum-Dum nodded eagerly, ready to learn.\n\n**Strings**"
-        },
-        {
-          "type": "code",
-          "content": "name = \"Dum-Dum\"\nprint(name)  -- Output: Dum-Dum"
-        },
-        {
-          "type": "text",
-          "content": "\"Strings are used to store text,\" Lua Lama explained. \"You can assign a string to a variable, like we did with your name.\"\n\n**Numbers**"
-        },
-        {
-          "type": "code",
-          "content": "age = 25\nprint(age)  -- Output: 25"
-        },
-        {
-          "type": "text",
-          "content": "\"Numbers, on the other hand, are for handling numerical values and calculations,\" Lua Lama continued. \"Here, we've stored your age in a number variable.”\n\n**Tables**"
-        },
-        {
-          "type": "code",
-          "content": "favorite_foods = {\"pizza\", \"ice cream\", \"cookies\"}\nprint(favorite_foods[1])  -- Output: pizza"
-        },
-        {
-          "type": "text",
-          "content": "\"But the real powerhouses are tables,\" Lua Lama said with a smile. \"Tables can hold multiple values, like a list of your favorite foods. They're incredibly versatile.\"\n\nAs Dum-Dum experimented with the code examples, he could feel the concepts solidifying in his mind. Variables were no longer just abstract ideas but practical tools he could use to store and manipulate data.\n\"I think I'm starting to get it,\" Dum-Dum said, a sense of accomplishment washing over him.\nLua Lama nodded approvingly. \"Excellent! You've taken the first step in your Lua journey. But there's still more to learn.\"\n\nClick \"Next\" to continue your adventure and discover the power of functions, the building blocks that bring your code to life!"
+          "content": "- Any Code Editor (VSCode, Sublime Text, etc)"
         }
       ]
     },
     {
-      "title": "Checkpoint 2",
+      "title": "Checkpoint 1: Dum-Dum's Big Idea",
       "content": [
         {
           "type": "text",
-          "content": "After getting a solid grasp of variables, Dum-Dum was ready to dive deeper into the world of Lua programming. This time, his mentor, Lua Lama, introduced him to the concept of functions.\n\n**Named Functions:**"
+          "content": "Once upon a time, in the vast digital world, lived an elephant named Dum-Dum. Dum-Dum wasn’t an ordinary elephant; he loved technology and was always looking for ways to organize his life better. One day, he stumbled upon \"ao,\" a powerful decentralized computer built on Arweave. Intrigued by its potential, Dum-Dum decided to create a to-do list to manage his tasks and help others do the same. He was eager to share his creation with the world and show how you, too, can build it.\n\nHe started by setting up his project. Would Dum-Dum be able to bring his idea to life? Only time would tell."
         },
         {
           "type": "code",
-          "content": "-- Define a named function\nfunction greet(name)\n    print(\"Hello, \" .. name)\nend\n\n-- Call the named function\ngreet(\"Dum-Dum\") -- Output: Hello, Dum-Dum"
-        },
-        {
-          "type": "text",
-          "content": "\"Named functions are easy to identify and call by their name,\" said Lua Lama. \"You define them with a name, parameters (inputs), and a body with the instructions to execute.\"\n\nDum-Dum understood right away. He created a named function called greet that took a name parameter and printed a greeting.\n\n**Unnamed Functions (Lambdas):**"
-        },
-        {
-          "type": "code",
-          "content": "-- Define an unnamed function (lambda)\nsquare = function(x) return x * x end\n\n-- Call the unnamed function\nprint(square(5)) -- Output: 25"
-        },
-        {
-          "type": "text",
-          "content": "\"Unnamed functions, also known as lambdas, are like anonymous helpers,\" Lua Lama continued. \"You can assign them to variables or pass them around like values.\"\n\nDum-Dum assigned an unnamed function that calculated the square of a number to the variable square. He could then call this function using the variable name.\n\n**Calling Functions**\n\"To call a function, you write its name followed by parentheses,\" Lua Lama explained. \"If it takes arguments, you put them inside the parentheses, separated by commas.\"\n\nDum-Dum practiced calling functions with different numbers of arguments, understanding how Lua adjusted the arguments to match the parameters.\n\nAs he worked through more examples, Dum-Dum realized functions were like reusable code snippets, allowing him to encapsulate logic and avoid repeating the same instructions over and over.\n\n\"Functions are the building blocks that bring your Lua programs to life,\" Lua Lama concluded with a smile.\n\n**Up Next:** With a solid grasp of variables and functions, Dum-Dum is ready to explore the world of tables – Lua's versatile data structures. Click \"Next\" to learn how to keep your tables organized and efficient!"
+          "content": ""
         }
       ]
     },
     {
-      "title": "Checkpoint 3",
+      "title": "Checkpoint 2: Setting Up the Foundation",
       "content": [
         {
           "type": "text",
-          "content": "After mastering variables and functions, Dum-Dum was ready to dive into the world of tables – Lua's versatile data structures. Lua Lama knew that keeping tables organized and efficient was crucial for writing clean, maintainable code.\n\n\"Tables are like dynamic containers that can hold multiple values of different types,\" Lua Lama began. \"But with great power comes great responsibility – you must learn to keep your tables tidy.\"\n\n1. Adding Elements with table.insert: The table.insert function allows you to add new elements to a table"
+          "content": "To get started, Dum-Dum needed to set up his project. Being the smart developer he is, instead of creating a new file locally, he went to [Better Idea IDE](https://ide.betteridea.dev/) to directly start building his to-do list application in an online IDE environment. This would allow him to quickly prototype and iterate without worrying about local setup and dependencies.\n\nIn there, he would set up the basic structure for his tasks using Lua. He required the JSON module and initialized the tables for tasks:"
         },
         {
           "type": "code",
-          "content": "fruits = {\"apple\", \"banana\"}\ntable.insert(fruits, \"orange\") -- Add \"orange\" to the end\nprint(table.concat(fruits, \", \")) -- Output: apple, banana, orange"
-        },
+          "content": "local json = require('json')\n\nTASKS_TABLE = TASKS_TABLE or {}\nPENDING_TASKS_TABLE = PENDING_TASKS_TABLE or {}\n\nTASK_KEYS = TASK_KEYS or {}"
+        }
+      ]
+    },
+    {
+      "title": "Checkpoint 3: Creating the Tasks",
+      "content": [
         {
           "type": "text",
-          "content": "2. Concatenating with table.concat"
+          "content": "Next, Dum-Dum needed a way to create tasks. He added a handler for creating tasks:"
         },
         {
           "type": "code",
-          "content": "print(table.concat(fruits, \", \")) -- Output: apple, banana, orange"
-        },
+          "content": "Handlers.add(\n    \"CreateTask\",\n    Handlers.utils.hasMatchingTag(\"Action\", \"Create-Task\"),\n    function(msg)\n        -- Check if the message, task, or sender is invalid\n        if not msg or not msg.Task or not msg.From then\n            print(\"Error: Invalid message, task, or process.\")\n            return false\n        end\n\n        -- Initialize TASKS_TABLE if not already present\n        if not TASKS_TABLE[msg.From] then\n            TASKS_TABLE[msg.From] = {}\n        end\n\n        -- Initialize TASK_KEYS if not already present\n        if not TASK_KEYS[msg.From] then\n            TASK_KEYS[msg.From] = 0\n        end\n\n        -- Get the current task key\n        local currentTaskKey = TASK_KEYS[msg.From]\n\n        -- Assign the task to the TASKS_TABLE at the current key\n        TASKS_TABLE[msg.From][currentTaskKey] = msg.Task\n\n        -- Increment the task key for the next task\n        TASK_KEYS[msg.From] = currentTaskKey + 1\n\n        -- Print the updated task list\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+        }
+      ]
+    },
+    {
+      "title": "Checkpoint 4: Reading Tasks",
+      "content": [
         {
           "type": "text",
-          "content": "3. Removing Elements with table.remove: The table.remove function lets you remove elements from a table by specifying their position"
+          "content": "After setting up the ability to create tasks, Dum-Dum recognized the need to read them. A handler was added for this purpose:"
         },
         {
           "type": "code",
-          "content": "table.remove(fruits, 2) -- Remove the 2nd element (banana)\nprint(table.concat(fruits, \", \")) -- Output: apple, orange"
-        },
+          "content": "Handlers.add(\n    \"ReadTask\",\n    Handlers.utils.hasMatchingTag(\"Action\", \"Read-Task\"),\n    function(msg)\n        -- Print the task list for the user\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+        }
+      ]
+    },
+    {
+      "title": "Checkpoint 5: Updating Tasks",
+      "content": [
         {
           "type": "text",
-          "content": "4. Getting the Length with #"
+          "content": "Dum-Dum realized he needed to update tasks. He added a handler to update tasks:"
         },
         {
           "type": "code",
-          "content": "print(#fruits) -- Output: 2"
-        },
+          "content": "Handlers.add(\n    \"UpdateTask\",  -- Handler name\n    Handlers.utils.hasMatchingTag(\"Action\", \"Update-Task\"),  -- Match action tag\n    function(msg)  -- Handler function\n        -- Check if the message, sender, key, or task is invalid\n        if not msg or not msg.From or not msg.Key or not msg.Task then\n            print(\"Error: Invalid message, key, user, or task.\")\n            return false\n        end\n\n        -- Convert key to integer\n        local key = msg.Key\n        local int_key = tonumber(key)\n\n        -- Print the task before updating\n        print(TASKS_TABLE[msg.From][int_key])\n\n        -- Update the task with the specified key\n        TASKS_TABLE[msg.From][key] = msg.Task\n\n        -- Print the updated task list\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+        }
+      ]
+    },
+    {
+      "title": "Checkpoint 6: Deleting Tasks",
+      "content": [
         {
           "type": "text",
-          "content": "5. Iterating with pairs and ipairs: To iterate over the elements of a table, you can use the pairs or ipairs functions. They allow you to access both the indices and values in a loop."
+          "content": "Finally, Dum-Dum needed to delete tasks. He added a handler to delete tasks, ensuring tasks existed before deleting them:"
         },
         {
           "type": "code",
-          "content": "-- Define a table\nfruits = {apple = \"red\", banana = \"yellow\", orange = \"orange\"}\n\n-- Iterate over the table using pairs\nfor key, value in pairs(fruits) do\n    print(key, value)\nend\n\n-- Define a table\nfruit = {\"apple\", \"banana\", \"orange\"}\n\n-- Iterate over the table using ipairs\nfor index, value in ipairs(fruit) do\n    print(index, value)\nend"
-        },
+          "content": "Handlers.add(\n    \"DeleteTask\",  -- Handler name\n    Handlers.utils.hasMatchingTag(\"Action\", \"Delete-Task\"),  -- Match action tag\n    function(msg)  -- Handler function\n        -- Check if the message, sender, or key is invalid\n        if not msg or not msg.From or not msg.Key then\n            print(\"Error: Invalid message, key, or user.\")\n            return false\n        end\n\n        -- Convert key to integer\n        local key = msg.Key\n        local int_key = tonumber(key)\n\n        -- Check if the user's task list or the task with the specified key exists\n        if not TASKS_TABLE[msg.From] or TASKS_TABLE[msg.From][int_key] == nil then\n            print(\"Error: Task with key\", key, \"for user\", msg.From, \"does not exist.\")\n            return false\n        end\n\n        -- Print the task to be deleted\n        print(TASKS_TABLE[msg.From][int_key])\n\n        -- Delete the task from the user's task list\n        TASKS_TABLE[msg.From][int_key] = nil\n\n        -- Print the updated task list\n        print(TASKS_TABLE[msg.From][int_key])\n        print(\"Your Task List\" .. TASKS_TABLE[msg.From])\n    end\n)"
+        }
+      ]
+    },
+    {
+      "title": "Checkpoint 7: Running the Process",
+      "content": [
         {
           "type": "text",
-          "content": "As Dum-Dum practiced using these table functions, he could see how they helped him maintain organized and efficient tables, free from clutter and easy to work with.\n\n\"Keeping your tables clean is essential for writing quality Lua code,\" Lua Lama emphasized. \"With these tools in your arsenal, you'll be able to manage your tables like a pro.\"\n\n**Up Next:** With a solid understanding of tables and their functions, Dum-Dum is ready to take on the next challenge: iterating over tables with ease. Click \"Next\" to learn more!"
+          "content": "To bring his to-do list to life, Dum-Dum follows these steps:\n\n1. Load the todo.lua file to initialize the to-do list script.\n\n ```bash\n.load todo.lua\n``` \n\nThis command loads the Lua script for Dum-Dum's to-do list into the system.\n\n2. Create a task titled \"Build on AO\" to kickstart his project.\n\n```bash\nSend({ Target = ao.id, Action = \"Create-Task\", Task = \"Build on AO\" })\n```\n\nDum-Dum initiates his project by creating a task titled \"Build on AO\" using the 'Create-Task' action.\n\n3. Read the task list to review existing tasks and ensure accuracy.\n\n```bash\nSend({ Target = ao.id, Action = \"Read-Task\" })\n```\n\nDum-Dum checks the task list to see the tasks he has created so far.\n\n4. Create another task with a specified key for further organization.\n\n```bash\nSend({ Target = ao.id, Action = \"Update-Task\", Key = \"0\" })\n```\n\nDum-Dum creates a new task with a specific key, providing further organization to his to-do list.\n\n5. Delete the task with the specified key to manage his list effectively.\n\n```bash\nSend({ Target = ao.id, Action = \"Delete-Task\", Key = \"0\" })\n```\n\nDum-Dum removes the task with the specified key, ensuring his to-do list remains updated and organized.\n\nBy following these steps, Dum-Dum demonstrates the functionality of his to-do list, showcasing how tasks can be created, managed, and organized efficiently."
         }
       ]
     }

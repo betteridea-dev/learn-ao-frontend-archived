@@ -12,7 +12,7 @@ const IdeasCard = () => {
               {idea.name}
             </div>
             <button className="bg-[#353535] text-zinc-100 text-base font-light font-plus-jakarta-sans p-2 rounded-md leading-tight">
-              <a href="">Talk to us</a>
+              <a href="hello@betteridea.dev">Talk to us</a>
             </button>
           </div>
         </Link>

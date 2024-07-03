@@ -1,63 +1,86 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-import { useEffect, useState } from "react";
-import { CodeCell } from "@betteridea/codecell";
+type CourseDetailProps = {
+  params: {
+    courseId: string;
+  };
+};
 
-const Fundamentals = () => {
-  const [courseData, setCourseData] = useState(null);
-  const url = process.env.NEXT_PUBLIC_BACKEND_BASE + "/course";
+type Enrollment = {
+  id: number;
+  userId: number;
+  courseId: number;
+  createdAt: string;
+};
+
+type Module = {
+  id: number;
+  index: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type Course = {
+  id: number;
+  name: string;
+  tags: string[];
+  descriptionSmall: string;
+  descriptionLarge: string;
+  descriptionPoints: string[];
+  enrollments: Enrollment[];
+  Module: Module[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export default function CourseDetail({ params }: CourseDetailProps) {
+  const [course, setCourse] = useState<Course | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const jwt = localStorage.getItem("jwt-token");
-      if (!jwt) {
-        console.error("JWT not found in localStorage");
-        return;
-      }
-
+    const fetchCourse = async () => {
       try {
-        const response = await fetch(url, {
+        const token = localStorage.getItem("jwt-token");
+
+        if (!token) {
+          setError("JWT token not found");
+          setLoading(false);
+          return;
+        }
+
+        const response = await axios.get(`http://localhost:8000/course`, {
           headers: {
-            Accept: "*/*",
-            Authorization: `Bearer ${jwt}`,
+            accept: "*/*",
+            Authorization: `Bearer ${token}`,
           },
         });
-        if (response.ok) {
-          const data = await response.json();
-          setCourseData(data);
-        } else {
-          console.error("Failed to fetch course data");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+        console.log(response)
+        setCourse(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Error fetching course data");
+        setLoading(false);
       }
     };
 
-    fetchData();
-  }, []);
+    fetchCourse();
+  }, [params.courseId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>
-      <h1>Fundamentals</h1>
-      {courseData ? (
-        <div>
-          <h2>Course Data:</h2>
-          <pre>{JSON.stringify(courseData, null, 2)}</pre>
-        </div>
-      ) : (
-        <p>Loading course data...</p>
-      )}
-      <CodeCell
-        nowallet
-        cellId="1"
-        appName="BetterIDEa-Code-Cell"
-        code="print('Portable code cell ftw!')"
-        onAOProcess={(pid) => console.log("using process: ", pid)}
-        onNewMessage={(msgs) => console.log("new messages: ", msgs)}
-        onInbox={(inbox) => console.log("got inbox: ", inbox)}
-      />
+      <h1>Course Detail: {course?.name}</h1>
     </div>
   );
-};
-
-export default Fundamentals;
+}

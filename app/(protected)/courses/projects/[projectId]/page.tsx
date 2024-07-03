@@ -41,40 +41,44 @@ const Projects = () => {
 
   return (
     <main className="min-h-screen p-0 text-white">
-      <div className="bg-black h-full font-plus-jakarta-sans flex flex-col w-full p-2 lg:p-20 relative">
+      <div className="bg-black min-h-screen h-full font-plus-jakarta-sans flex flex-col w-full p-4 lg:p-20 relative">
         {error && <p>{error}</p>}
         {courseData && (
           <div>
-            <div className="text-center text-white text-[34px] mt-8 lg:mt-0 font-bold font-['Lora'] leading-[34px] pb-16">
-              Basics of Lua
+            <div className="text-center text-white text-2xl lg:text-4xl mt-8 lg:mt-0 font-bold font-['Lora'] leading-tight pb-16">
+              {courseData.heading[currentPage]?.title}
             </div>
-            <h2 className="text-[#E9FF91] font-semibold mb-8 uppercase">
+            <h2 className="text-[#E9FF91] font-semibold mb-8 uppercase text-xl px-4 lg:text-2xl">
               {courseData.chapters[currentPage].title}
             </h2>
-            {courseData.chapters[currentPage].content.map(
-              (section: any, idx: any) => (
-                <div key={idx}>
-                  {section.type === "text" && (
-                    <div className="my-4 text-[16px]">
-                      <ReactMarkdown>{section.content}</ReactMarkdown>
-                    </div>
-                  )}
-                  {section.type === "code" && (
-                    <CodeCell
-                      nowallet
-                      cellId={`${currentPage}-${idx}`}
-                      appName="LearnAO"
-                      code={section.content}
-                      onAOProcess={(pid) => console.log("using process: ", pid)}
-                      onNewMessage={(msgs) =>
-                        console.log("new messages: ", msgs)
-                      }
-                      onInbox={(inbox) => console.log("got inbox: ", inbox)}
-                    />
-                  )}
-                </div>
-              )
-            )}
+            <div className="flex flex-wrap w-full">
+              {courseData.chapters[currentPage].content.map(
+                (section: any, idx: any) => (
+                  <div key={idx} className="w-full lg:w-1/2 px-4">
+                    {section.type === "text" && (
+                      <div className="text-lg lg:text-xl leading-relaxed">
+                        <ReactMarkdown>{section.content}</ReactMarkdown>
+                      </div>
+                    )}
+                    {section.type === "code" && (
+                      <CodeCell
+                        nowallet
+                        cellId={`${currentPage}-${idx}`}
+                        appName="LearnAO"
+                        code={section.content}
+                        onAOProcess={(pid) =>
+                          console.log("using process: ", pid)
+                        }
+                        onNewMessage={(msgs) =>
+                          console.log("new messages: ", msgs)
+                        }
+                        onInbox={(inbox) => console.log("got inbox: ", inbox)}
+                      />
+                    )}
+                  </div>
+                )
+              )}
+            </div>
             <div className="flex justify-between items-center gap-6 mt-10">
               <button
                 onClick={handlePrevious}
